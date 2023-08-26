@@ -37,3 +37,81 @@
     transform: rotate(360deg);
   }
 }
+
+/* ServiceSummaryPage.css */
+
+.service-container {
+    width: 80%;
+    padding: 0;
+    margin-top: 60px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-status-authorized {
+    color: green;
+}
+
+.service-status-unauthorized {
+    color: red;
+}
+
+.instance-table {
+    width: 100%;
+    padding: 10px;
+}
+
+.table-heading {
+    background: rgb(240, 242, 245);
+    color: rgb(10, 10, 10);
+    padding: 10px;
+}
+
+.table-row {
+    background: rgb(240, 242, 245);
+    color: rgb(10, 10, 10);
+    padding: 10px;
+}
+.table-cell {
+    padding: 10px;
+    padding-left: 20px; /* Add left padding */
+}
+.service-block {
+    width: 80%;
+    padding: 0;
+    margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(171, 245, 224);
+    padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.service-summary-page {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.service-summary-content {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+

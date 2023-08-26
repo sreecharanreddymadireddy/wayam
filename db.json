@@ -1,0 +1,88 @@
+{
+  "registrationSuccessResponse": {
+    "success": true,
+    "message": "Successfully registered your AWD ID. Let's get started on the next steps."
+  },
+  "regions": [
+    "ap-south-1",
+    "eu-west-3",
+    "eu-north-1"
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    }
+  ],
+  "products": [
+    {
+      "id": 1001,
+      "productName": "Laptop",
+      "price": 1200.50
+    },
+    {
+      "id": 1002,
+      "productName": "Mouse",
+      "price": 20.75
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "serviceName": "Service 1",
+      "authorizationStatus": true,
+      "instances": [
+        {
+          "instanceId": 101,
+          "instanceName": "Instance A",
+          "startDate": "2023-08-25 09:00",
+          "endDate": "2023-08-25 18:00"
+        },
+          {
+          "instanceId": 102,
+          "instanceName": "Instance A",
+          "startDate": "2023-08-25 09:00",
+          "endDate": "2023-08-25 18:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "serviceName": "Service 2",
+      "authorizationStatus": false,
+      "instances": [
+        {
+           "instanceId": 103,
+          "instanceName": "Instance B",
+          "startDate": "2023-08-25 09:00",
+          "endDate": "2023-08-25 18:00"
+          }
+      ]
+    },
+    {
+      "id": 3,
+      "serviceName": "Service 3",
+      "authorizationStatus": true,
+      "instances": [
+   {
+           "instanceId": 105,
+          "instanceName": "Instance C",
+          "startDate": "2023-08-25 09:00",
+          "endDate": "2023-08-25 18:00"
+          }, {
+          "instanceId": 106,
+          "instanceName": "Instance A",
+          "startDate": "2023-08-25 09:00",
+          "endDate": "2023-08-25 18:00"
+        }
+      ]
+    }
+  ]
+
+}
