@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, OverlayTrigger, Form, Tooltip, Alert } from 'react-bootstrap';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { setFormData } from '../redux/formDataActions'; // Check the import path
 
 const RegistrationFormComponent = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const formData = useSelector(state => state.formData);
 
     const [selectedServiceContent, setSelectedServiceContent] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [regions, setRegions] = useState([]);
     const [isErrorVisible, setIsErrorVisible] = useState(false);
     const [sampleTextContent, setSampleTextContent] = useState('');
-    const history = useHistory();
-    const [formData, setFormData] = useState({
-        awdId: '',
-        awdRegion: '',
-        planType: 'Free For Ever',
-        services: [],
-    });
+
 
     const [errors, setErrors] = useState({
         awdId: '',
@@ -58,8 +57,12 @@ const RegistrationFormComponent = () => {
         e.preventDefault();
         if (validateForm()) {
             console.log('Form data:', formData);
+
+            // Dispatch the form data to the Redux store
+            dispatch(setFormData(formData));
+
             // Navigate to the service summary page after form submission
-            history.push('/service-summary');
+            history.push('/Services');
         }
     };
 
@@ -80,25 +83,36 @@ const RegistrationFormComponent = () => {
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
+        let updatedFormData = { ...formData }; // Create a copy of the current form data
+
         if (name === 'awdId') {
             if (!/^\d*$/.test(value)) {
                 return; // Only allow numeric values for AWD ID
             }
             setErrors((prevErrors) => ({ ...prevErrors, awdId: '' }));
+            updatedFormData = { ...updatedFormData, awdId: value };
         }
 
         if (name === 'awdRegion') {
-            setErrors((prevErrors) => ({ ...prevErrors, awdRegion: '' })); // Clear the error when the user selects a region
+            setErrors((prevErrors) => ({ ...prevErrors, awdRegion: '' }));
+            updatedFormData = { ...updatedFormData, awdRegion: value };
         }
+
         if (type === 'checkbox') {
             const updatedServices = checked
                 ? [...formData.services, value]
                 : formData.services.filter((service) => service !== value);
-            setFormData((prevData) => ({ ...prevData, services: updatedServices }));
-        } else {
-            setFormData((prevData) => ({ ...prevData, [name]: value }));
+            updatedFormData = { ...updatedFormData, services: updatedServices };
         }
+
+        if (type === 'radio') {
+            updatedFormData = { ...updatedFormData, [name]: value };
+        }
+
+        // Dispatch the updated form data to the Redux store
+        dispatch(setFormData(updatedFormData));
     };
+
     const handleServiceClick = (serviceText) => {
         setSelectedServiceContent(serviceText);
 

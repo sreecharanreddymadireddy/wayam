@@ -74,18 +74,18 @@ const ServiceSummaryPageComponent = () => {
                 {services.map((service) => (
                     <div key={service.id} className="service-block">
                         <div className="service-header">
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <h3 style={{ marginRight: '10px' }}>{service.serviceName}{' '}</h3>
-                                    <OverlayTrigger placement="top" overlay={renderTooltip('Service Name')}>
-                                        <i className="bi bi-info-circle tooltip-icon"></i>
-                                    </OverlayTrigger>
-                                </div>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <h3 style={{ marginRight: '10px' }}>{service.serviceName}{' '}</h3>
+                                <OverlayTrigger placement="top" overlay={renderTooltip('Service Name')}>
+                                    <i className="bi bi-info-circle tooltip-icon"></i>
+                                </OverlayTrigger>
+                            </div>
                             <div className={service.authorizationStatus ? 'service-status-authorized' : 'service-status-unauthorized'}>
                                 Authorization Status: {service.authorizationStatus ? 'Authorized' : 'Not Authorized'}
                             </div>
                             <div>
                                 {service.instances.length < 2 ? (
-                                    <Link to={`/add-instance/${service.id}`}>
+                                    <Link to={`/ServiceItems/${service.id}`}>
                                         <span className="add-link"><i className="bi bi-plus-circle"></i> Add</span>
                                     </Link>
                                 ) : (
