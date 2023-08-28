@@ -58,13 +58,22 @@ const ServiceItemPageComponent = () => {
             <div className="d-flex justify-content-center " style={{ minHeight: '100vh', color: '#2D3748', fontSize: 20, fontFamily: 'Nunito', fontWeight: '400', wordWrap: 'break-word' }}>
                 <div className="text-center">
 
-                    <h3>Add Service</h3>
-                    <p >Lorem ipsum dolor sit amet consectetur. Commodo in tristique hendrerit porta viverra at.</p>
                     <div>
-                        <h2>Service Item Page</h2>
-                        <p>AWD ID: {formData.formData.awdId}</p>
-                        <p>AWD Region: {formData.formData.awdRegion}</p>
+                        <h3>Add Service</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur. Commodo in tristique hendrerit porta viverra at.</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', background: 'lightgray', padding: '10px' }}>
+                            <div>
+                                <p>AWD ID:</p>
+                                <p>{formData.formData.awdId}</p>
+                            </div>
+                            <div>
+                                <p>AWD Region:</p>
+                                <p>{formData.formData.awdRegion}</p>
+                            </div>
+                        </div>
                     </div>
+
+
                     <p>Instance Id: {instanceId}</p>
                     <label>ID Select Box:</label>
                     <select value={selectedId} onChange={(e) => setSelectedId(e.target.value)}>

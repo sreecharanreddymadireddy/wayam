@@ -115,24 +115,6 @@ const RegistrationFormComponent = () => {
 
     const handleServiceClick = (serviceText) => {
         setSelectedServiceContent(serviceText);
-
-        // Populate the sample text content based on the clicked service
-        if (serviceText === 'Service 1 text') {
-            setSampleTextContent(`{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "s3:*"
-            ],
-            "Effect": "Allow",
-            "Resource": "arn:aws:s3:::terraform-state-chakri"
-        }
-    ]
-}`);
-        } else if (serviceText === 'Service 2 text') {
-            setSampleTextContent(`Sample text for Service 2.`);
-        }
     };
 
 
@@ -140,30 +122,46 @@ const RegistrationFormComponent = () => {
 
         <Container fluid className="vh-100 d-flex">
             <Row className="gradient-form" >
-                <Col md={6} className="w-50 text-light d-flex flex-column justify-content-center align-items-center" style={{ backgroundColor: 'rgb(12,67,75,255)' }}>
-                    <div className="mb-5">
-                        <img
-                            src={'/logo.png'}
-                            alt="Example"
-                            style={{ maxWidth: '200px', maxHeight: '200px' }}
-                        />
-                    </div>
-                    <div className="d-flex flex-column align-items-start p-4">
-                        <h1>Your Cloud Cost</h1>
-                        <h1>Remote Controller</h1>
-                        <p>This tool helps you control your cloud costs.
-                            It provides you with insights into your spending
-                            and helps you identify areas where you can
-                            save money.
-                        </p>
-                        <pre className="selected-service-content">
-                            {selectedServiceContent}
-                        </pre>
-                        <pre className="selected-service-content">
-                            {sampleTextContent}
-                        </pre>
-                    </div>
-                </Col>
+              <Col md={6} className="w-50 text-light d-flex flex-column justify-content-center align-items-center" style={{ background: 'linear-gradient(135deg, #042F3A, #7DF6D2)', minHeight: '100vh' }}>
+    {!selectedServiceContent && (
+        <div className="mb-5">
+            <img
+                src={'/logo.png'}
+                alt="Example"
+                style={{ maxWidth: '200px', maxHeight: '200px' }}
+            />
+        </div>
+    )}
+    {!selectedServiceContent && (
+        <div className="d-flex flex-column align-items-start p-4">
+            <h1>Your Cloud Cost</h1>
+            <h1>Remote Controller</h1>
+            <p>This tool helps you control your cloud costs.
+                It provides you with insights into your spending
+                and helps you identify areas where you can
+                save money.
+            </p>
+        </div>
+    )}
+    {selectedServiceContent && (
+         <div className="d-flex flex-column align-items-start p-4">
+                {selectedServiceContent}
+                <p>
+                    This tool helps you control your cloud costs. It provides you with insights 
+                    into your spending and helps you identify areas where you can save money.
+                    . Lorem ipsum dolor sit amet consectetur. 
+                    . Rhoncus integer fermentum mattis nec adipiscing accumsan. Ipsum elit 
+                    at nisi consectetur augue erat tempus. 
+                    . Rhoncus metus duis aliquam est aliquam scelerisque enim. 
+                    Scelerisque mauris risus consectetur amet aenean. 
+                    . Sit mauris egestas enim varius eros phasellus fringilla lectus facilisis.
+                    . Dictum magna consequat vitae diam convallis justo malesuada consectetur. Ut arcu eu diam arcu.
+                </p>
+                </div>
+    )}
+</Col>
+
+
 
                 <Col md={6} className="overflow-auto p-5" style={{ height: '100vh' }}>
                     <div className="d-flex align-items-start flex-column">
