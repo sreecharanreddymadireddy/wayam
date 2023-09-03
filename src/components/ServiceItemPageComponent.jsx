@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import HeaderPageComponent from './HeaderPageComponent';
 import Select from 'react-select';
 import moment from 'moment-timezone';
 import { useSelector } from 'react-redux';
-const ServiceItemPageComponent = () => {
-    const formData = useSelector(state => state);
-    const { instanceId } = useParams();
-    const handleTimezoneChange = (timezone) => {
-        setSelectedTimezone(timezone);
-    };
 
-    // State for the form inputs
+const ServiceItemPageComponent = () => {
+
     const [selectedId, setSelectedId] = useState('');
+    const [ids, setIds] = useState([]);
     const [applyForAllIds, setApplyForAllIds] = useState(false);
     const [selectedTimezone, setSelectedTimezone] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState('');
+    const [selectedStartDate, setSelectedStartDate] = useState('');
     const [selectedDays, setSelectedDays] = useState([]);
-    const [showAddTagFields, setShowAddTagFields] = useState(false);
-    const [tagKey, setTagKey] = useState('');
-    const [tagValue, setTagValue] = useState('');
-    const [tags, setTags] = useState([]);
-
-    // Function to handle adding a tag
-    const handleAddTag = () => {
-        if (tagKey && tagValue && tags.length < 50) {
-            setTags([...tags, { key: tagKey, value: tagValue }]);
-            setTagKey('');
-            setTagValue('');
-            setShowAddTagFields(false);
-        }
+    const formData = useSelector(state => state);
+    const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+    const [tagRows, setTagRows] = useState([]);
+    const [tagKeyError, setTagKeyError] = useState(false);
+    const handleTimezoneChange = (timezone) => {
+        setSelectedTimezone(timezone);
     };
-
-    // Function to handle removing a tag
-    const handleRemoveTag = (index) => {
-        const newTags = tags.filter((_, i) => i !== index);
-        setTags(newTags);
+    const generateTimezoneOptions = () => {
+        const timezones = moment.tz.names();
+        const options = timezones.map((tz) => ({
+            value: tz,
+            label: `${moment().tz(tz).format('z')} - ${tz}`,
+        }));
+        return options;
     };
-    const timezones = moment.tz.names().map((tz) => ({ value: tz, label: tz }));
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    // Function to handle form submission
+    const timezones = generateTimezoneOptions();
+
+    useEffect(() => {
+        fetch('http://localhost:5000/users')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const userIDs = data.map(user => user.id);
+                setIds(userIDs);
+            })
+            .catch(error => console.error('Error fetching IDs:', error));
+    }, []);
+
     const handleSubmit = () => {
-        // Process and submit the form data as needed
-        // ...
+
     };
     const handleDayChange = (day) => {
         if (selectedDays.includes(day)) {
@@ -52,111 +52,202 @@ const ServiceItemPageComponent = () => {
         }
     };
 
+    const handleAddTagRow = () => {
+        if (tagRows.length < 50) {
+            setTagRows([...tagRows, { key: '', value: '' }]);
+        }
+    };
+
+    const handleTagRowChange = (index, field, value) => {
+        const newTagRows = [...tagRows];
+        newTagRows[index][field] = value;
+        setTagRows(newTagRows);
+
+        if (field === 'key') {
+            const normalizedKey = value.toLowerCase();
+            if (normalizedKey.startsWith('aws:')) {
+                setTagKeyError(true);
+            } else {
+                setTagKeyError(false);
+            }
+        }
+    };
+
+    const handleRemoveTagRow = (index) => {
+        const newTagRows = tagRows.filter((_, i) => i !== index);
+        setTagRows(newTagRows);
+    };
+    const handleClearForm = () => {
+        setSelectedId('');
+        setApplyForAllIds(false);
+        setSelectedTimezone(null);
+        setSelectedEndDate('');
+        setSelectedStartDate('');
+        setSelectedDays([]);
+        setTagRows([]);
+        setTagKeyError(false);
+    };
     return (
         <div>
             <HeaderPageComponent />
-            <div className="d-flex justify-content-center " style={{ minHeight: '100vh', color: '#2D3748', fontSize: 20, fontFamily: 'Nunito', fontWeight: '400', wordWrap: 'break-word' }}>
-                <div className="text-center">
-
-                    <div>
-                        <h3>Add Service</h3>
+            <div className="main-content mt-5">
+                <div className="form-container">
+                    <div className="form-section">
+                        <h3 className="text-center">Add Service</h3>
                         <p>Lorem ipsum dolor sit amet consectetur. Commodo in tristique hendrerit porta viverra at.</p>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', background: 'lightgray', padding: '10px' }}>
+                        <div className="awd-info" style={{ display: 'flex', justifyContent: 'space-around', backgroundColor: '#DFF3E7', padding: '2px', borderRadius: '5px' }}>
                             <div>
                                 <p>AWD ID:</p>
+
                                 <p>{formData.formData.awdId}</p>
                             </div>
                             <div>
                                 <p>AWD Region:</p>
+
                                 <p>{formData.formData.awdRegion}</p>
                             </div>
                         </div>
-                    </div>
+                        <div className="form-field">
+                            <label>ID<span className="text-danger">*</span></label>
+                            <div className="d-flex align-items-center">
+                                <div className="custom-dropdown">
+                                    <select className="form-control" style={{ width: '250px' }} value={selectedId} onChange={(e) => setSelectedId(e.target.value)}>
 
+                                        <option value="">Select an Option</option>
 
-                    <p>Instance Id: {instanceId}</p>
-                    <label>ID Select Box:</label>
-                    <select value={selectedId} onChange={(e) => setSelectedId(e.target.value)}>
-                        <option value="">Select an ID</option>
-                        <option value="id1">ID 1</option>
-                        <option value="id2">ID 2</option>
-                        {/* ... Other options ... */}
-                    </select>
-                    <div>
-                        <input
-                            type="checkbox"
-                            checked={applyForAllIds}
-                            onChange={(e) => setApplyForAllIds(e.target.checked)}
-                        />
-                        Apply for all IDs
-                    </div>
-                    <div>
-                        <label>Timezone:</label>
-                        <Select
-                            value={selectedTimezone}
-                            onChange={handleTimezoneChange}
-                            options={timezones}
-                        />
-                    </div>
-                    <div>
-                        <label>End Date & Time:</label>
-                        <input
-                            type="datetime-local"
-                            value={selectedEndDate}
-                            onChange={(e) => setSelectedEndDate(e.target.value)}
-                        />
-                    </div>
-                    <div>
+                                        {ids.map(id => (
+                                            <option key={id} value={id}>
+                                                {id}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="ml-5" style={{ paddingLeft: '25px' }}>
+                                    <input
+                                        type="checkbox"
+                                        className="form-check-input"
+                                        checked={applyForAllIds}
+                                        onChange={(e) => setApplyForAllIds(e.target.checked)}
+                                    />
+                                    <label className="form-check-label">Apply for all IDs</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-field" >
+                            <label>Timezone<span className="text-danger">*</span></label>
+
+                            <Select
+                                value={selectedTimezone}
+                                onChange={handleTimezoneChange}
+                                options={timezones}
+                                styles={{
+                                    control: provided => ({
+                                        ...provided,
+                                        width: '250px',
+                                        minHeight: '30px',
+                                    }),
+                                }}
+                            />
+                        </div>
+                        <div className="form-field">
+                            <div className="d-flex">
+                                <div style={{ flex: 1, flexDirection: 'column' }}>
+                                    <label>Start Date & Time<span className="text-danger">*</span></label>
+                                    <input
+                                        type="datetime-local"
+                                        value={selectedStartDate}
+                                        onChange={(e) => setSelectedStartDate(e.target.value)}
+                                    />
+                                </div>
+                                <div style={{ flex: 1, marginLeft: '1rem', display: 'flex', flexDirection: 'column' }}>
+                                    <label>End Date & Time<span className="text-danger">*</span></label>
+
+                                    <input
+                                        type="datetime-local"
+                                        value={selectedEndDate}
+                                        onChange={(e) => setSelectedEndDate(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                         <label>Days of the Week:</label>
-                        {daysOfWeek.map((day) => (
-                            <div key={day}>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedDays.includes(day)}
-                                    onChange={() => handleDayChange(day)}
-                                />
-                                {day}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <div className="form-field" style={{ display: 'flex', flexDirection: 'row', gap: '25px' }}>
+                                {daysOfWeek.map((day) => (
+                                    <label key={day} style={{ display: 'flex', alignItems: 'center' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedDays.includes(day)}
+                                            onChange={() => handleDayChange(day)}
+                                        />
+                                        <span style={{ marginLeft: '5px' }}>{day}</span>
+                                    </label>
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                    <div>
-                        <h3>Tags</h3>
-                        <button onClick={() => setShowAddTagFields(true)}>Add Tag</button>
-                        {showAddTagFields && (
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Tag Key"
-                                    value={tagKey}
-                                    onChange={(e) => setTagKey(e.target.value)}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Tag Value (max 20 characters)"
-                                    value={tagValue}
-                                    maxLength={20}
-                                    onChange={(e) => setTagValue(e.target.value)}
-                                />
-                                <button onClick={handleAddTag}>Add</button>
-                                <button onClick={() => setShowAddTagFields(false)}>Clear</button>
-                            </div>
-                        )}
-                        <ul>
-                            {tags.map((tag, index) => (
-                                <li key={index}>
-                                    {tag.key}: {tag.value}
-                                    <button onClick={() => handleRemoveTag(index)}>Delete</button>
-                                </li>
+                        </div>
+                        <div className="form-field">
+                            <label>Tags</label>
+                            <span className="add-link ml-4" onClick={handleAddTagRow}>
+                                <i className="bi bi-plus-circle"></i> Add
+                            </span>
+                            {tagRows.map((tagRow, index) => (
+                                <div key={index} className="tag-section">
+                                    <div className="tag-inputs">
+                                        <div className="d-flex align-items-center">
+                                            <div>
+                                                <label>Key</label>
+                                            </div>
+                                            <div style={{ paddingLeft: '278px' }}>
+                                                <label>Value</label>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex align-items-center">
+                                            <div style={{ position: 'relative', marginRight: '10px' }}>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Key"
+                                                    value={tagRow.key}
+                                                    onChange={(e) => handleTagRowChange(index, 'key', e.target.value)}
+                                                    className={tagKeyError && tagRow.key && tagRow.key.toLowerCase().startsWith('aws:') ? 'error-input' : ''}
+                                                />
+                                                {tagKeyError && tagRow.key && tagRow.key.toLowerCase().startsWith('aws:') && (
+                                                    <div className="error-message">
+                                                        Key cannot start with 'aws:'
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div style={{ paddingLeft: '120px' }}>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Value (max 20 characters)"
+                                                    value={tagRow.value}
+                                                    maxLength={20}
+                                                    onChange={(e) => handleTagRowChange(index, 'value', e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="ml-2">
+                                                <span onClick={() => handleRemoveTagRow(index)}>
+                                                    <i className="bi bi-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
+                        <div className="form-field d-flex justify-content-end">
+                            <button className="btn btn-secondary mr-2" onClick={handleClearForm}>Clear Form</button>
+                            <button className="btn btn-primary" onClick={handleSubmit}>Add Service</button>
+                        </div>
                     </div>
-                    <button onClick={handleSubmit}>Add Service</button>
                 </div>
             </div>
         </div>
     );
+
 };
-
-
-
 export default ServiceItemPageComponent;
+
+
+
+

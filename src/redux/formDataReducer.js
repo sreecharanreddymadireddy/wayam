@@ -1,7 +1,7 @@
 const initialState = {
     awdId: '',
     awdRegion: '',
-    planType: 'Free For Ever',
+    planType: '',
     services: [],
 };
 
