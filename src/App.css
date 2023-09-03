@@ -9,6 +9,7 @@
   font-family: "RalewayMedium";
   src: url(./Fonts/Raleway-Medium.ttf);
 }
+
 @font-face {
   font-family: "RobotoRegular";
   src: url(./Fonts/Roboto/Roboto-Regular.ttf);
@@ -45,6 +46,7 @@
   line-height: 16px;
   padding: .75rem 0;
 }
+
 .tooltip:after {
   content: "";
   display: block;
@@ -55,6 +57,7 @@
   left: calc(50% - 8px);
   box-shadow: 0 0 black;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -188,6 +191,18 @@
   font-size: 12px;
 }
 
+.custom-col-highlight {
+  background-color: #F7F7F7 !important;
+  /* White background with !important */
+  border-right: 0.5px solid #9AE6B4;
+  /* Right-side border */
+  border: 1px solid lightgreen;
+  /* Border style */
+  border-radius: 10px;
+  /* Border radius */
+}
+
+
 /* styles.css */
 .custom-col-style {
   position: relative;
@@ -250,9 +265,11 @@
   border: 0.5px #c53030 solid;
   display: flex;
 }
+
 .aws-account-error {
   max-width: 500px;
 }
+
 .error-icon {
   width: 24px;
   height: 24px;
@@ -338,6 +355,8 @@
   font-family: "Nunito Sans";
   font-weight: 800;
   line-height: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 100px;
 }
 
 .tooltip-content {
@@ -347,6 +366,7 @@
   font-family: "NunitoSansRegular";
   line-height: 16px;
   padding-bottom: 1rem;
+
 }
 
 .custom-label {
@@ -356,15 +376,18 @@
   line-height: 24px;
   word-wrap: break-word;
 }
+
 input[type="text"]::placeholder {
   font-family: "RobotoRegular";
   font-size: 14px;
   line-height: 24px;
 }
+
 select.form-control {
   color: #718096;
   font-family: "RobotoRegular";
 }
+
 .custom-form-check {
   color: #171923;
   font-size: 14px;
@@ -403,9 +426,11 @@ select.form-control {
   word-wrap: break-word;
   margin-left: 8px;
 }
+
 .service-checkbox .form-check-label {
   font-family: "RobotoMedium";
 }
+
 .custom-button:hover,
 .custom-button:active,
 .custom-button:focus,
@@ -419,6 +444,7 @@ select.form-control {
   word-wrap: break-word;
   padding: 0.375rem 3rem;
 }
+
 .custom-button:hover,
 .custom-button:focus {
   box-shadow: 0 0 0px 3px #1b59625e;
@@ -455,6 +481,7 @@ select.form-control {
 .is-invalid .custom-form-check input[type="checkbox"] {
   box-shadow: inset 0 0 0px 2px #bf2912;
 }
+
 .is-invalid input[type="radio"] {
   appearance: none;
   border: 2px solid #bf2912;
@@ -465,10 +492,12 @@ input[type="checkbox"],
 input[type="radio"] {
   accent-color: #1b5962;
 }
+
 .form-check-input {
   width: 16px;
   height: 16px;
 }
+
 .custom-checkbox-label {
   display: inline-flex;
   align-items: center;

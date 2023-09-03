@@ -29,20 +29,6 @@ const RegistrationFormComponent = () => {
     planType: null,
     service: null,
   });
-  const renderTooltip = (text) => (
-    <Tooltip
-      id="custom-tooltip"
-      style={{
-        fontSize: 13,
-        fontFamily: "Nunito Sans",
-        fontWeight: "800",
-        lineHeight: 2,
-        wordWrap: "break-word",
-      }}
-    >
-      {text}
-    </Tooltip>
-  );
 
   const simulateBackendError = (maskedEmail, isVisible) => {
     const errorMessage = `The AWS Account ID is already in use by b*****u@g****.com. Please choose another AWS Account.`;
@@ -149,27 +135,32 @@ const RegistrationFormComponent = () => {
   return (
     <Container fluid>
       <Row className="gradient-form">
-        <Col md={6} className="custom-col-style">
+        <Col
+          md={6}
+          className={`${selectedServiceContent ? 'custom-col-highlight' : 'custom-col-style'
+            }`}
+        >
           {!selectedServiceContent && (
             <div className="my-5 py-5 mx-auto logo-container">
               <img src={"/logo.png"} alt="Example" className="logo" />
             </div>
           )}
-          {!selectedServiceContent && (
+          {!selectedServiceContent ? ( // Check if selectedServiceContent is falsy
             <div className="d-flex flex-column align-items-start ml-md-5 my-4">
               <h1 className="custom-heading">
                 Your Cloud Cost
                 <span>Remote Controller</span>
               </h1>
               <div className="custom-description mt-2">
-                This tool helps you control your cloud costs.It
+                This tool helps you control your cloud costs. It
                 <span>provides you with insights into your spending</span>
                 <span>and helps you identify areas where you can</span>
                 <span>save money.</span>
               </div>
             </div>
-          )}
-          {selectedServiceContent && (
+          ) : null}
+
+          {selectedServiceContent ? (
             <div className="d-flex flex-column align-items-start p-4">
               {selectedServiceContent}
               <p>
@@ -185,8 +176,9 @@ const RegistrationFormComponent = () => {
                 consectetur. Ut arcu eu diam arcu.
               </p>
             </div>
-          )}
+          ) : null}
         </Col>
+
 
         <Col
           md={6}
@@ -266,11 +258,10 @@ const RegistrationFormComponent = () => {
                       placement="top"
                       overlay={
                         <Tooltip id="tooltip">
-                          <div class="tooltip__arrow"></div>
+                          <div class="tooltip__arrow" ></div>
                           <span className="d-flex align-items-start tooltip-heading">
                             Lorem ipsum
                           </span>
-
                           <span className="tooltip-content d-flex align-items-start">
                             Lorem ipsum dolor sit amet consectetur. Arcu urna
                             commodo sociis turpis aliquam risus blandit. Quam
