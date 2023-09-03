@@ -1,9 +1,60 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+@font-face {
+  font-family: "RalewaySemiBold";
+  src: url(./Fonts/Raleway-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "RalewayMedium";
+  src: url(./Fonts/Raleway-Medium.ttf);
+}
+@font-face {
+  font-family: "RobotoRegular";
+  src: url(./Fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "RobotoMedium";
+  src: url(./Fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+  font-family: "NunitoBold";
+  src: url(./Fonts/Nunito/Nunito-Bold.ttf);
+}
+
+@font-face {
+  font-family: "NunitoSansExtraBold";
+  src: url(./Fonts/Nunito_Sans/NunitoSans_7pt-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: "NunitoSansRegular";
+  src: url(./Fonts/Nunito_Sans/NunitoSans-Regular.ttf);
+}
+
 .App {
   text-align: center;
 }
 
+.tooltip-heading {
+  font-family: "NunitoSansExtraBold";
+  color: "#2B303C";
+  font-size: 13px;
+  line-height: 16px;
+  padding: .75rem 0;
+}
+.tooltip:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-style: solid;
+  border-width: 8px;
+  border-color: #ccc transparent transparent transparent;
+  left: calc(50% - 8px);
+  box-shadow: 0 0 black;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -125,8 +176,6 @@
   height: 100vh;
 }
 
-
-
 .error-input {
   border: 1px solid red;
 }
@@ -139,20 +188,15 @@
   font-size: 12px;
 }
 
-
 /* styles.css */
 .custom-col-style {
   position: relative;
-  min-height: 100vh;
   background-image: url("/bg.jpg");
   background-size: 100% 100%;
 }
 
 .logo-container {
-  width: 177.45156860351562px;
-  height: 100px;
-  margin-top: 90px;
-  margin-left: 250px;
+  max-width: 177.45156860351562px;
 }
 
 .logo {
@@ -166,10 +210,9 @@
 .custom-heading {
   width: 100%;
   color: white;
-  font-size: 50px;
-  font-family: 'Raleway';
-  font-weight: 100;
-  line-height: 1;
+  font-size: 56px;
+  font-family: "RalewaySemiBold";
+  line-height: 64px;
   word-wrap: break-word;
   display: flex;
   flex-direction: column;
@@ -182,10 +225,9 @@
 .custom-description {
   width: 100%;
   color: white;
-  font-size: 20px;
-  font-family: 'Raleway';
-  font-weight: 100;
-  line-height: 1;
+  font-size: 24px;
+  font-family: "RalewayMedium";
+  line-height: 32px;
   word-wrap: break-word;
   display: flex;
   flex-direction: column;
@@ -202,13 +244,15 @@
 .custom-error {
   width: 100%;
   height: 100%;
-  padding: 16px;
-  background: #FFF5F5;
+  padding: 8px 10px;
+  background: #fff5f5;
   border-radius: 4px;
-  border: 0.50px #C53030 solid;
+  border: 0.5px #c53030 solid;
   display: flex;
 }
-
+.aws-account-error {
+  max-width: 500px;
+}
 .error-icon {
   width: 24px;
   height: 24px;
@@ -222,7 +266,7 @@
 .error-bar {
   width: 16px;
   height: 16px;
-  border: 0.75px #BF2912 solid;
+  border: 0.75px #bf2912 solid;
 }
 
 .error-dot {
@@ -231,25 +275,26 @@
   position: absolute;
   left: 6px;
   top: 6px;
-  border: 1px #2D3748 solid;
+  border: 1px #2d3748 solid;
 }
 
 .error-content {
   flex: 1;
-  color: #2D3748;
+  color: #2d3748;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   line-height: 24px;
 }
 
 .error-title {
-  color: #9B2C2C;
+  color: #9b2c2c;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
   word-wrap: break-word;
   margin-bottom: 4px;
+  font-family: "RobotoMedium";
 }
 
 .error-message {
@@ -257,23 +302,18 @@
 }
 
 .error-message-container {
-
-  font-family: 'Roboto';
-  font-weight: '400';
+  font-family: "RobotoRegular";
+  font-weight: "400";
   font-size: 14px;
-  margin-top: 20px;
   color: Color/Grey/700;
-
 }
 
 .error-message-container1 {
-
-  font-family: 'Roboto';
-  font-weight: '400';
+  font-family: "RobotoRegular";
+  font-weight: "400";
   font-size: 14px;
   margin-top: -4px;
   color: Color/Grey/700;
-
 }
 
 .error-close {
@@ -290,55 +330,66 @@
 
 .tooltip-inner {
   background-color: white;
+  max-width: 328px;
   color: black;
   word-wrap: break-word;
   border: 1px solid #ccc;
   font-size: 14px;
-  font-family: 'Nunito Sans';
+  font-family: "Nunito Sans";
   font-weight: 800;
   line-height: 1;
 }
 
 .tooltip-content {
-  color: '#2B303C';
-  font-Size: 10px;
-  font-Family: 'Nunito Sans';
-  font-Weight: 400;
-  line-Height: 1;
+  text-align: left;
+  color: "#2B303C";
+  font-size: 13px;
+  font-family: "NunitoSansRegular";
+  line-height: 16px;
+  padding-bottom: 1rem;
 }
 
 .custom-label {
   color: #171923;
   font-size: 16px;
-  font-family: Roboto;
-  font-weight: 500;
+  font-family: "RobotoMedium";
   line-height: 24px;
   word-wrap: break-word;
 }
-
+input[type="text"]::placeholder {
+  font-family: "RobotoRegular";
+  font-size: 14px;
+  line-height: 24px;
+}
+select.form-control {
+  color: #718096;
+  font-family: "RobotoRegular";
+}
 .custom-form-check {
   color: #171923;
   font-size: 14px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 500;
   line-height: 24px;
   word-wrap: break-word;
 }
 
 .service-content {
-  color: #2D3748;
+  color: #2d3748;
   font-size: 14px;
-  font-family: 'Roboto';
-  font-weight: 400;
+  font-family: "RobotoRegular";
   line-height: 24px;
   word-wrap: break-word;
+  margin-left: 28px;
 }
 
-.link-button {
-  color: #1B5962;
+.link-button,
+.link-button:hover,
+.link-button:focus,
+.link-button:active {
+  color: #1b5962 !important;
   font-size: 14px;
-  font-family: 'Roboto';
-  font-weight: 400;
+  font-family: "RobotoRegular";
   text-decoration: underline;
   line-height: 24px;
   word-wrap: break-word;
@@ -347,20 +398,30 @@
 .form-check-label {
   color: #171923;
   font-size: 14px;
-  font-family: 'Roboto';
-  font-weight: 400;
+  font-family: "RobotoRegular";
   line-height: 24px;
   word-wrap: break-word;
+  margin-left: 8px;
 }
-
+.service-checkbox .form-check-label {
+  font-family: "RobotoMedium";
+}
+.custom-button:hover,
+.custom-button:active,
+.custom-button:focus,
 .custom-button {
   color: white;
-  background-color: #1B5962;
+  background-color: #1b5962 !important;
+  border-color: #1b5962 !important;
   font-size: 16px;
-  font-family: 'Roboto';
-  font-weight: 500;
+  font-family: "RobotoMedium";
   line-height: 24px;
   word-wrap: break-word;
+  padding: 0.375rem 3rem;
+}
+.custom-button:hover,
+.custom-button:focus {
+  box-shadow: 0 0 0px 3px #1b59625e;
 }
 
 .button-container {
@@ -371,22 +432,19 @@
 
 /* styles.css */
 .error-message1 {
-  color: #BF2912;
+  color: #bf2912;
   font-size: 14px;
-  font-family: 'Nunito';
-  font-weight: 700;
+  font-family: "NunitoBold";
   line-height: 16px;
   word-wrap: break-word;
-  margin-top: -10px;
-  margin-bottom: 10px;
   /* Add spacing between options and error message */
 }
 
 /* styles.css */
 .error-feedback {
-  color: #BF2912;
+  color: #bf2912;
   font-size: 14px;
-  font-family: 'Nunito';
+  font-family: "NunitoBold";
   font-weight: 700;
   line-height: 16px;
   word-wrap: break-word;
@@ -395,13 +453,22 @@
 }
 
 .is-invalid .custom-form-check input[type="checkbox"] {
-  border-color: red;
-  /* Change the border color to red */
-  outline-color: red;
-  /* Change the outline color to red */
-  /* Add any other styling to indicate an error */
+  box-shadow: inset 0 0 0px 2px #bf2912;
+}
+.is-invalid input[type="radio"] {
+  appearance: none;
+  border: 2px solid #bf2912;
+  border-radius: 50%;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #1b5962;
+}
+.form-check-input {
+  width: 16px;
+  height: 16px;
+}
 .custom-checkbox-label {
   display: inline-flex;
   align-items: center;
