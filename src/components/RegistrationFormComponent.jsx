@@ -270,7 +270,8 @@ const RegistrationFormComponent = () => {
                         </Tooltip>
                       }
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <i className="bi bi-info-circle small"></i>
+
                     </OverlayTrigger>
                   </Form.Label>
                 </div>
@@ -312,7 +313,7 @@ const RegistrationFormComponent = () => {
                         </Tooltip>
                       }
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <i className="bi bi-info-circle small"></i>
                     </OverlayTrigger>
                   </Form.Label>
                 </div>
