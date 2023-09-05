@@ -27,7 +27,7 @@ const RegistrationFormComponent = () => {
     awdId: "",
     awdRegion: "",
     planType: null,
-    service: null,
+    services: null,
   });
 
   const simulateBackendError = (maskedEmail, isVisible) => {
@@ -56,8 +56,8 @@ const RegistrationFormComponent = () => {
       .matches(/^\d+$/, "AWD ID  is required")
       .required("AWD ID  is required"),
     awdRegion: yup.string().required("AWD Region is required"),
-    planType: yup.bool().oneOf([true], "error"),
-    service: yup.bool().oneOf([true], "error"),
+    planType: yup.string().required("plan type is required"),
+    services: yup.array().required("service is required").min(1),
   });
 
   const handleFormSubmit = (e) => {
@@ -89,13 +89,17 @@ const RegistrationFormComponent = () => {
     } catch (validationErrors) {
       const newErrors = {};
       validationErrors.inner.forEach((error) => {
-        newErrors[error.path] = error.message;
+        // newErrors[error.path] = error.message;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [error.path]: error.message,
+        }));
       });
-      setErrors(newErrors);
+      // setErrors(newErrors);
       return false;
     }
   };
-
+  console.log(errors);
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     let updatedFormData = { ...formData };
@@ -114,7 +118,7 @@ const RegistrationFormComponent = () => {
     }
 
     if (type === "checkbox") {
-      setErrors((prevErrors) => ({ ...prevErrors, service: null }));
+      setErrors((prevErrors) => ({ ...prevErrors, services: null }));
       const updatedServices = checked
         ? [...formData.services, value]
         : formData.services.filter((service) => service !== value);
@@ -131,14 +135,14 @@ const RegistrationFormComponent = () => {
   const handleServiceClick = (serviceText) => {
     setSelectedServiceContent(serviceText);
   };
-
   return (
     <Container fluid>
       <Row className="gradient-form">
         <Col
           md={6}
-          className={`${selectedServiceContent ? 'custom-col-highlight' : 'custom-col-style'
-            }`}
+          className={`${
+            selectedServiceContent ? "custom-col-highlight" : "custom-col-style"
+          }`}
         >
           {!selectedServiceContent && (
             <div className="my-5 py-5 mx-auto logo-container">
@@ -179,13 +183,12 @@ const RegistrationFormComponent = () => {
           ) : null}
         </Col>
 
-
         <Col
           md={6}
           className="overflow-auto p-md-5 p-3 mx-auto ml-md-0"
           //   style={{ maxWidth: "540px" }}
         >
-          <div className="d-flex align-items-start flex-column">
+          <div className="d-flex align-items-start flex-column px-3">
             <h2
               style={{
                 color: "#2D3748",
@@ -249,7 +252,7 @@ const RegistrationFormComponent = () => {
           </div>
 
           <Form noValidate onSubmit={handleFormSubmit}>
-            <div style={{ maxWidth: "410px" }}>
+            <div className="px-3" style={{ maxWidth: "410px" }}>
               <Form.Group className="mb-3">
                 <div className="d-flex align-items-start">
                   <Form.Label className="custom-label">
@@ -258,7 +261,7 @@ const RegistrationFormComponent = () => {
                       placement="top"
                       overlay={
                         <Tooltip id="tooltip">
-                          <div class="tooltip__arrow" ></div>
+                          <div class="tooltip__arrow"></div>
                           <span className="d-flex align-items-start tooltip-heading">
                             Lorem ipsum
                           </span>
@@ -271,7 +274,6 @@ const RegistrationFormComponent = () => {
                       }
                     >
                       <i className="bi bi-info-circle small"></i>
-
                     </OverlayTrigger>
                   </Form.Label>
                 </div>
@@ -341,7 +343,7 @@ const RegistrationFormComponent = () => {
                   {errors.awdRegion}
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="mb-2">
+              <Form.Group className="mb-3">
                 <div className="d-flex align-items-start">
                   <Form.Label className="mr-2 custom-label">
                     Plan Type<span className="text-danger">*</span>
@@ -428,23 +430,21 @@ const RegistrationFormComponent = () => {
             </div>
             <div style={{ maxWidth: "440px" }}>
               <Form.Group
-                className="mb-3 custom-label"
+                className="p-3 custom-label"
                 style={{
                   width: "100%",
                   height: "100%",
                   background: "white",
                   boxShadow: "0px 2px 3px rgba(3, 59, 105, 0.10)",
                   borderRadius: 8,
-                  border: "0.50px #9AE6B4 solid",
                   border: "1px solid lightgreen", // Add border style
                   borderRadius: "10px", // Add border radius
-                  padding: "10px",
                 }}
               >
                 <div className="d-flex align-items-start">
                   <Form.Label>Select Services</Form.Label>
                 </div>
-                {submitted && errors.service !== null && (
+                {errors.services !== null && (
                   <div className="custom-error mb-3">
                     <div
                       className="error-content"
@@ -490,7 +490,7 @@ const RegistrationFormComponent = () => {
                 <div className="service-item mb-3">
                   <div
                     className={`service-checkbox d-flex align-items-start ${
-                      errors.service !== null ? "is-invalid" : ""
+                      errors.services !== null ? "is-invalid" : ""
                     }`}
                   >
                     <Form.Check
@@ -523,7 +523,7 @@ const RegistrationFormComponent = () => {
                 <div className="service-item mb-3 ">
                   <div
                     className={`service-checkbox d-flex align-items-start ${
-                      errors.service !== null ? "is-invalid" : ""
+                      errors.services !== null ? "is-invalid" : ""
                     }`}
                   >
                     <Form.Check
@@ -557,7 +557,7 @@ const RegistrationFormComponent = () => {
                 <div className="service-item mb-3">
                   <div
                     className={`service-checkbox d-flex align-items-start ${
-                      errors.service !== null ? "is-invalid" : ""
+                      errors.services !== null ? "is-invalid" : ""
                     }`}
                   >
                     <Form.Check
@@ -587,10 +587,10 @@ const RegistrationFormComponent = () => {
                   </div>
                 </div>
 
-                <div className="service-item mb-3">
+                <div className="service-item">
                   <div
                     className={`service-checkbox d-flex align-items-start ${
-                      errors.service !== null ? "is-invalid" : ""
+                      errors.services !== null ? "is-invalid" : ""
                     }`}
                   >
                     <Form.Check

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import HeaderPageComponent from "./HeaderPageComponent";
+import { AiOutlinePlus, AiOutlineInfoCircle } from "react-icons/ai";
+import { PiTrashLight } from "react-icons/pi";
+import { LuEdit } from "react-icons/lu";
+import { IoBarChartOutline } from "react-icons/io5";
 
 const ServiceSummaryPageComponent = () => {
   const [services, setServices] = useState([]);
@@ -56,7 +60,7 @@ const ServiceSummaryPageComponent = () => {
   }, [registrationSuccessResponse]);
   console.log("setIsSuccessMessageVisible" + isSuccessMessageVisible);
   return (
-    <div>
+    <div className="container-fluid">
       <HeaderPageComponent />
       <div
         style={{
@@ -69,10 +73,11 @@ const ServiceSummaryPageComponent = () => {
         {isSuccessMessageVisible && (
           <div
             style={{
-              backgroundColor: "#92ebd5",
+              backgroundColor: "#F0FFF4",
               color: "rgb(9, 9, 9)",
               borderRadius: "5px",
-              padding: "5px",
+              padding: "16px 8px",
+              marginTop: "1rem",
               boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
               maxWidth: "700px",
             }}
@@ -86,7 +91,7 @@ const ServiceSummaryPageComponent = () => {
             steps.
             <button
               type="button"
-              className="close"
+              className="ml-2 close"
               onClick={handleSuccessMessageClose}
             >
               &times;
@@ -94,42 +99,43 @@ const ServiceSummaryPageComponent = () => {
           </div>
         )}
       </div>
-      <div
-        className="service-summary-container"
-        style={{ overflow: "auto", maxHeight: "calc(100vh - 80px)" }}
-      >
+      <div className="service-summary-container">
         {services.map((service) => (
           <div key={service.id} className="service-block">
             <div className="service-header">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <h3 style={{ marginRight: "10px" }}>{service.serviceName} </h3>
+                <h3 className="mb-0 mr-3">{service.serviceName} </h3>
                 <OverlayTrigger
                   placement="top"
                   overlay={renderTooltip("Service Name")}
                 >
-                  <i className="bi bi-info-circle tooltip-icon"></i>
+                  <AiOutlineInfoCircle size={22} className="mr-3" />
+                  {/* <i className="bi bi-info-circle tooltip-icon mr-3"></i> */}
                 </OverlayTrigger>
-              </div>
-              <div
-                className={
-                  service.authorizationStatus
-                    ? "service-status-authorized"
-                    : "service-status-unauthorized"
-                }
-              >
-                Authorization Status:{" "}
-                {service.authorizationStatus ? "Authorized" : "Not Authorized"}
+                <div
+                  className={`pl-3 service-status ${
+                    service.authorizationStatus
+                      ? "service-status-authorized"
+                      : "service-status-unauthorized"
+                  }`}
+                  style={{ borderLeft: "2px solid #C8DAEB", lineHeight: 2.25 }}
+                >
+                  Authorization Status:{" "}
+                  {service.authorizationStatus
+                    ? "Authorized"
+                    : "Not Authorized"}
+                </div>
               </div>
               <div>
                 {service.instances.length < 2 ? (
                   <Link to={`/ServiceItems/${service.id}`}>
                     <span className="add-link">
-                      <i className="bi bi-plus-circle"></i> Add
+                      <AiOutlinePlus size={26} /> Add Service
                     </span>
                   </Link>
                 ) : (
                   <span className="add-link-disabled">
-                    <i className="bi bi-plus-circle"></i> Add
+                    <AiOutlinePlus size={26} /> Add Service
                   </span>
                 )}
               </div>
@@ -143,7 +149,8 @@ const ServiceSummaryPageComponent = () => {
                       placement="top"
                       overlay={renderTooltip("Instance Id")}
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <AiOutlineInfoCircle />
+                      {/* <i className="bi bi-info-circle tooltip-icon"></i> */}
                     </OverlayTrigger>
                   </th>
                   <th className="table-cell">
@@ -152,7 +159,8 @@ const ServiceSummaryPageComponent = () => {
                       placement="top"
                       overlay={renderTooltip("Instance Name")}
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <AiOutlineInfoCircle />
+                      {/* <i className="bi bi-info-circle tooltip-icon"></i> */}
                     </OverlayTrigger>
                   </th>
                   <th className="table-cell">
@@ -161,7 +169,8 @@ const ServiceSummaryPageComponent = () => {
                       placement="top"
                       overlay={renderTooltip("Start Date & Time")}
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <AiOutlineInfoCircle />
+                      {/* <i className="bi bi-info-circle tooltip-icon"></i> */}
                     </OverlayTrigger>
                   </th>
                   <th className="table-cell">
@@ -170,16 +179,18 @@ const ServiceSummaryPageComponent = () => {
                       placement="top"
                       overlay={renderTooltip("End Date & Time")}
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <AiOutlineInfoCircle />
+                      {/* <i className="bi bi-info-circle tooltip-icon"></i> */}
                     </OverlayTrigger>
                   </th>
-                  <th className="table-cell">
+                  <th className="table-cell text-center">
                     <span>Action </span>
                     <OverlayTrigger
                       placement="top"
                       overlay={renderTooltip("Action")}
                     >
-                      <i className="bi bi-info-circle tooltip-icon"></i>
+                      <AiOutlineInfoCircle />
+                      {/* <i className="bi bi-info-circle tooltip-icon"></i> */}
                     </OverlayTrigger>
                   </th>
                 </tr>
@@ -195,14 +206,30 @@ const ServiceSummaryPageComponent = () => {
                     </td>
                     <td className="table-cell">{instance.startDate}</td>
                     <td className="table-cell">{instance.endDate}</td>
-                    <td className="table-cell">
+                    <td className="table-cell text-center">
                       <Button
+                        className="p-0 m-2 remove-outline"
+                        variant="link"
+                        onClick={() => console.log("edit")}
+                      >
+                        <LuEdit size={22} color="#1B5962" />
+                      </Button>
+                      <Button
+                        className="p-0 m-2 remove-outline"
+                        variant="link"
+                        onClick={() => console.log("chart")}
+                      >
+                        <IoBarChartOutline size={22} color="#1B5962" />
+                      </Button>
+                      <Button
+                        className="p-0 m-2 remove-outline"
                         variant="link"
                         onClick={() =>
                           handleDeleteInstance(service.id, instance.instanceId)
                         }
                       >
-                        <i className="bi bi-trash"></i>
+                        <PiTrashLight size={22} color="#1B5962" />
+                        {/* <i className="bi bi-trash"></i> */}
                       </Button>
                     </td>
                   </tr>

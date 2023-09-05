@@ -1,5 +1,4 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-
 @font-face {
   font-family: "RalewaySemiBold";
   src: url(./Fonts/Raleway-SemiBold.ttf);
@@ -44,9 +43,11 @@
   color: "#2B303C";
   font-size: 13px;
   line-height: 16px;
-  padding: .75rem 0;
+  padding: 0.75rem 0;
 }
-
+.tooltip {
+  opacity: 1 !important;
+}
 .tooltip:after {
   content: "";
   display: block;
@@ -152,12 +153,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgb(171, 245, 224);
+  background: #dff3e7;
   padding: 10px 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-
+.service-header h3 {
+  font-family: "NunitoSansExtraBold";
+}
+.service-header .service-status {
+  font-family: "NunitoSansRegular";
+  font-weight: bold;
+}
+.remove-outline:active,
+.remove-outline:focus,
+.remove-outline:hover,
+.remove-outline {
+  outline: 0 !important;
+  box-shadow: none;
+}
 .service-summary-page {
   display: flex;
   flex-direction: column;
@@ -192,16 +206,15 @@
 }
 
 .custom-col-highlight {
-  background-color: #F7F7F7 !important;
+  background-color: #f7f7f7 !important;
   /* White background with !important */
-  border-right: 0.5px solid #9AE6B4;
+  border-right: 0.5px solid #9ae6b4;
   /* Right-side border */
   border: 1px solid lightgreen;
   /* Border style */
   border-radius: 10px;
   /* Border radius */
 }
-
 
 /* styles.css */
 .custom-col-style {
@@ -366,7 +379,6 @@
   font-family: "NunitoSansRegular";
   line-height: 16px;
   padding-bottom: 1rem;
-
 }
 
 .custom-label {
@@ -545,4 +557,23 @@ input[type="radio"] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+th {
+  font-family: "NunitoSansExtraBold";
+  line-height: 2;
+}
+thead tr {
+  background-color: #edf2f7;
+}
+.table-row {
+  border-bottom: 2px solid #f7f7f7;
+}
+.table-cell {
+  padding: 16px;
+}
+tbody tr {
+  font-family: "NunitoSansRegular";
+  font-weight: bold;
+  background-color: #ffffff !important;
 }
