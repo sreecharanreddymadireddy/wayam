@@ -165,19 +165,42 @@ const RegistrationFormComponent = () => {
           ) : null}
 
           {selectedServiceContent ? (
-            <div className="d-flex flex-column align-items-start p-4">
-              {selectedServiceContent}
-              <p>
+            <div
+              className="d-flex flex-column align-items-start px-3 mx-auto"
+              style={{ maxWidth: "560px" }}
+            >
+              <h2 className="mx-auto service-details-heading mb-4">
+                {selectedServiceContent}
+              </h2>
+              <p className="service-details-content">
                 This tool helps you control your cloud costs. It provides you
                 with insights into your spending and helps you identify areas
-                where you can save money. . Lorem ipsum dolor sit amet
-                consectetur. . Rhoncus integer fermentum mattis nec adipiscing
-                accumsan. Ipsum elit at nisi consectetur augue erat tempus. .
-                Rhoncus metus duis aliquam est aliquam scelerisque enim.
-                Scelerisque mauris risus consectetur amet aenean. . Sit mauris
-                egestas enim varius eros phasellus fringilla lectus facilisis. .
-                Dictum magna consequat vitae diam convallis justo malesuada
-                consectetur. Ut arcu eu diam arcu.
+                where you can save money.
+                <ul className="pl-4 mt-4">
+                  <li className="mb-4">
+                    Lorem ipsum dolor sit amet consectetur.
+                  </li>
+                  <li className="mb-4">
+                    Rhoncus integer fermentum mattis nec adipiscing accumsan.
+                    Ipsum elit at nisi consectetur augue erat tempus.
+                  </li>
+                  <li className="mb-4">
+                    Rhoncus metus duis aliquam est aliquam scelerisque enim.
+                    Scelerisque mauris risus consectetur amet aenean.
+                  </li>
+                  <li className="mb-4">
+                    Elit eget risus tempor elementum consectetur interdum ut.
+                    Mattis laoreet in purus sed viverra lectus.
+                  </li>
+                  <li className="mb-4">
+                    Sit mauris egestas enim varius eros phasellus fringilla
+                    lectus facilisis.
+                  </li>
+                  <li className="mb-4">
+                    Dictum magna consequat vitae diam convallis justo malesuada
+                    consectetur. Ut arcu eu diam arcu.
+                  </li>
+                </ul>
               </p>
             </div>
           ) : null}
@@ -193,7 +216,8 @@ const RegistrationFormComponent = () => {
               style={{
                 color: "#2D3748",
                 fontSize: "32px",
-                fontFamily: "RalewaySemiBold",
+                fontFamily: "Raleway",
+                fontWeight: 600,
                 lineHeight: "40px",
                 wordWrap: "break-word",
               }}
@@ -438,7 +462,7 @@ const RegistrationFormComponent = () => {
                   boxShadow: "0px 2px 3px rgba(3, 59, 105, 0.10)",
                   borderRadius: 8,
                   border: "1px solid lightgreen", // Add border style
-                  borderRadius: "10px", // Add border radius
+                  borderRadius: "8px", // Add border radius
                 }}
               >
                 <div className="d-flex align-items-start">
@@ -512,7 +536,7 @@ const RegistrationFormComponent = () => {
                       className="link-button"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleServiceClick("Service 1 text");
+                        handleServiceClick("Service Name 1");
                       }}
                     >
                       View Details
@@ -546,7 +570,7 @@ const RegistrationFormComponent = () => {
                       className="link-button"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleServiceClick("Service 1 text");
+                        handleServiceClick("Service Name 2");
                       }}
                     >
                       View Details
@@ -579,7 +603,7 @@ const RegistrationFormComponent = () => {
                       className="link-button"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleServiceClick("Service 3 text");
+                        handleServiceClick("Service Name 3");
                       }}
                     >
                       View Details
@@ -613,7 +637,7 @@ const RegistrationFormComponent = () => {
                       className="link-button"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleServiceClick("Service 4 text");
+                        handleServiceClick("Service Name 4");
                       }}
                     >
                       View Details

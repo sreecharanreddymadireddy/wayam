@@ -14,10 +14,10 @@ const HeaderPageComponent = () => {
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         borderRadius: "0 0 15px 15px",
         margin: "0 auto", // Center the Navbar
-        // maxWidth: '800px', // Add a maximum width
+        maxWidth: "1272px", // Add a maximum width
         padding: "10px 20px", // Add padding for better spacing
       }}
-      className="mx-5"
+      className="mx-auto"
     >
       {/* <Container fluid> */}
       {/* Use fluid container */}
@@ -35,14 +35,31 @@ const HeaderPageComponent = () => {
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="ml-auto mr-3">
-          <Nav.Link as={Link} to="/Services" style={{ color: "#333" }}>
-            <BsGearFill size={28} /> Add Service
+          {/* <Nav.Link as={Link} to="/Services" style={{ color: "#333" }}>
+            <BsGearFill size={24} /> Add Service
+          </Nav.Link> */}
+          <Nav.Link
+            className="mr-5 d-flex align-items-center pr-0"
+            as={Link}
+            to="#"
+            style={{ color: "#333" }}
+          >
+            {/* <TbUserCircle size={24} /> */}
+            <img
+              src="/user-circle.svg"
+              className="mr-1"
+              alt="user circle"
+            />{" "}
+            <span>Account</span>
           </Nav.Link>
-          <Nav.Link as={Link} to="#" style={{ color: "#333" }}>
-            <TbUserCircle size={28} /> Account
-          </Nav.Link>
-          <Nav.Link as={Link} to="/" style={{ color: "#333" }}>
-            <LuLogOut size={28} /> Logout
+          <Nav.Link
+            as={Link}
+            className="d-flex align-items-center pl-0"
+            to="/"
+            style={{ color: "#333" }}
+          >
+            <LuLogOut className="mr-1" size={24} color="#2D3748" />{" "}
+            <span>Logout</span>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

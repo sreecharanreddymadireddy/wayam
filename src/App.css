@@ -1,12 +1,8 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-@font-face {
-  font-family: "RalewaySemiBold";
-  src: url(./Fonts/Raleway-SemiBold.ttf);
-}
 
 @font-face {
-  font-family: "RalewayMedium";
-  src: url(./Fonts/Raleway-Medium.ttf);
+  font-family: "Raleway";
+  src: url(./Fonts/Raleway/Raleway-VariableFont_wght.ttf);
 }
 
 @font-face {
@@ -20,26 +16,26 @@
 }
 
 @font-face {
-  font-family: "NunitoBold";
-  src: url(./Fonts/Nunito/Nunito-Bold.ttf);
+  font-family: "Nunito";
+  src: url(./Fonts/Nunito/Nunito-VariableFont_wght.ttf);
 }
 
 @font-face {
-  font-family: "NunitoSansExtraBold";
-  src: url(./Fonts/Nunito_Sans/NunitoSans_7pt-ExtraBold.ttf);
-}
-
-@font-face {
-  font-family: "NunitoSansRegular";
-  src: url(./Fonts/Nunito_Sans/NunitoSans-Regular.ttf);
+  font-family: "NunitoSans";
+  src: url("./Fonts/Nunito_Sans/NunitoSans-VariableFont_YTLC\,opsz\,wdth\,wght.ttf");
 }
 
 .App {
   text-align: center;
 }
+.font-Nunito {
+  font-family: "Nunito";
+  font-weight: 400;
+}
 
 .tooltip-heading {
-  font-family: "NunitoSansExtraBold";
+  font-family: "NunitoSans";
+  font-weight: 800;
   color: "#2B303C";
   font-size: 13px;
   line-height: 16px;
@@ -69,7 +65,18 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.add-link,
+.add-link:hover {
+  color: #154d55;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+  font-family: "NunitoSans";
+  font-weight: 700;
+}
+.disabled {
+  opacity: 0.6;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -84,6 +91,12 @@
 .App-link {
   color: #61dafb;
 }
+.nav-link {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Raleway";
+  font-weight: 500;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -96,7 +109,21 @@
 }
 
 /* ServiceSummaryPage.css */
-
+.service-details-heading {
+  font-size: 32px;
+  line-height: 38px;
+  font-family: "Raleway";
+  font-weight: 600;
+}
+.service-details-content {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Raleway";
+  font-weight: 400;
+}
+.service-details-content ::marker {
+  color: black;
+}
 .service-container {
   width: 80%;
   padding: 0;
@@ -136,39 +163,59 @@
   padding-left: 20px;
   /* Add left padding */
 }
-
+.service-main-block {
+  overflow-x: scroll;
+  margin-bottom: 30px;
+}
 .service-block {
-  width: 80%;
+  /* width: 100%;
+  max-width: 948px; */
+  width: 948px;
   padding: 0;
-  margin-top: 25px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
 }
-
+.serivce-content .heading {
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+.serivce-content .content {
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
 .service-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #dff3e7;
-  padding: 10px 20px;
+  padding: 16px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .service-header h3 {
-  font-family: "NunitoSansExtraBold";
+  font-family: "NunitoSans";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
 }
 .service-header .service-status {
-  font-family: "NunitoSansRegular";
-  font-weight: bold;
+  font-family: "NunitoSans";
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.75rem;
 }
 .remove-outline:active,
 .remove-outline:focus,
 .remove-outline:hover,
 .remove-outline {
+  line-height: 16px;
   outline: 0 !important;
   box-shadow: none;
 }
@@ -190,7 +237,8 @@
 .main-content {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  max-width: 656px;
+  margin: auto;
 }
 
 .error-input {
@@ -206,13 +254,15 @@
 }
 
 .custom-col-highlight {
+  display: flex;
+  align-items: center;
   background-color: #f7f7f7 !important;
   /* White background with !important */
   border-right: 0.5px solid #9ae6b4;
   /* Right-side border */
   border: 1px solid lightgreen;
   /* Border style */
-  border-radius: 10px;
+  /* border-radius: 10px; */
   /* Border radius */
 }
 
@@ -239,7 +289,8 @@
   width: 100%;
   color: white;
   font-size: 56px;
-  font-family: "RalewaySemiBold";
+  font-family: "Raleway";
+  font-weight: 600;
   line-height: 64px;
   word-wrap: break-word;
   display: flex;
@@ -254,7 +305,8 @@
   width: 100%;
   color: white;
   font-size: 24px;
-  font-family: "RalewayMedium";
+  font-family: "Raleway";
+  font-weight: 500;
   line-height: 32px;
   word-wrap: break-word;
   display: flex;
@@ -376,7 +428,8 @@
   text-align: left;
   color: "#2B303C";
   font-size: 13px;
-  font-family: "NunitoSansRegular";
+  font-family: "NunitoSans";
+  font-weight: 400;
   line-height: 16px;
   padding-bottom: 1rem;
 }
@@ -394,7 +447,9 @@ input[type="text"]::placeholder {
   font-size: 14px;
   line-height: 24px;
 }
-
+.form-control {
+  border-radius: 4px;
+}
 select.form-control {
   color: #718096;
   font-family: "RobotoRegular";
@@ -456,6 +511,18 @@ select.form-control {
   word-wrap: break-word;
   padding: 0.375rem 3rem;
 }
+.custom-outline-button:hover,
+.custom-outline-button:active,
+.custom-outline-button:focus,
+.custom-outline-button {
+  border-color: #1b5962 !important;
+  background-color: white;
+  font-size: 16px;
+  font-family: "RobotoMedium";
+  line-height: 24px;
+  word-wrap: break-word;
+  padding: 0.375rem 3rem;
+}
 
 .custom-button:hover,
 .custom-button:focus {
@@ -472,7 +539,8 @@ select.form-control {
 .error-message1 {
   color: #bf2912;
   font-size: 14px;
-  font-family: "NunitoBold";
+  font-family: "Nunito";
+  font-weight: 700;
   line-height: 16px;
   word-wrap: break-word;
   /* Add spacing between options and error message */
@@ -482,7 +550,7 @@ select.form-control {
 .error-feedback {
   color: #bf2912;
   font-size: 14px;
-  font-family: "NunitoBold";
+  font-family: "Nunito";
   font-weight: 700;
   line-height: 16px;
   word-wrap: break-word;
@@ -560,8 +628,10 @@ input[type="radio"] {
 }
 
 th {
-  font-family: "NunitoSansExtraBold";
-  line-height: 2;
+  font-family: "Nunito";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
 }
 thead tr {
   background-color: #edf2f7;
@@ -570,10 +640,61 @@ thead tr {
   border-bottom: 2px solid #f7f7f7;
 }
 .table-cell {
-  padding: 16px;
+  padding: 16px 12px;
+}
+.table-cell a {
+  color: black;
 }
 tbody tr {
-  font-family: "NunitoSansRegular";
-  font-weight: bold;
+  font-family: "Nunito";
+  font-weight: 400;
   background-color: #ffffff !important;
+  font-size: 14px;
+  line-height: 16px;
+}
+.add-service .aws-data .content,
+.add-service .aws-data .heading {
+  font-family: "Nunito";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+.add-service .aws-data .content {
+  font-weight: 400;
+}
+.add-service .tags .tag-section label,
+.add-service label {
+  font-family: "RobotoMedium";
+  font-size: 16px;
+  line-height: 24px;
+}
+.add-service .tags .tag-section label {
+  font-family: "RobotoRegular";
+  font-weight: 500;
+}
+.add-service .tags .add-link {
+  font-family: "NunitoSans";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: pointer;
+}
+.add-service .tags label,
+.add-service .days-week {
+  font-family: "Nunito";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+.add-service .day {
+  font-size: 14px;
+}
+.form-control {
+  font-family: "RobotoRegular";
+}
+
+@media (min-width: 992px) {
+  .service-main-block {
+    overflow-x: hidden;
+  }
 }
